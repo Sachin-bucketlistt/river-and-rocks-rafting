@@ -1,14 +1,20 @@
 @import url('https://fonts.cdnfonts.com/css/gilroy-bold');
+@import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Gilroy-Bold', sans-serif;
+  /* font-family: 'Gilroy-Bold', sans-serif; */
+
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Syncopate", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 html {
@@ -19,11 +25,23 @@ h1{
   font-size: 2.5rem;
   font-weight: 700;
   line-height: 1.2;
-  font-family: 'Gilroy-Bold', sans-serif;
+  font-family: "Syncopate", sans-serif;
+  font-weight: 500;
+  font-style: normal;
 }
 
 h2{
   font-size: 2rem;
   font-weight: 700;
   line-height: 1.2;
+  font-family: "Syncopate", sans-serif;
+}
+
+p{
+  font-family: "Questrial", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0;
 }
