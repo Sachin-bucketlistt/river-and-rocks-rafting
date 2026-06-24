@@ -5,6 +5,7 @@ body {
   margin: 0;
   padding: 0;
   /* font-family: 'Gilroy-Bold', sans-serif; */
+  --brand-color: #ff0000;
 
 }
 
@@ -32,7 +33,7 @@ h1{
 
 h2{
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.2;
   font-family: "Syncopate", sans-serif;
 }
@@ -44,4 +45,17 @@ p{
   font-size: 1rem;
   line-height: 1.5;
   margin: 0;
+}
+
+.MaxWidthContainer{
+  max-width: 90%;
+}
+
+.MarginAuto{
+  margin: auto;
+}
+
+.SectionTopBottom{
+  padding-top: 80px;
+  padding-bottom: 30px;
 }
