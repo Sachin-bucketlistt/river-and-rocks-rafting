@@ -69,6 +69,12 @@ const FooterData = {
     { label: "Terms & Conditions", href: "/terms-and-conditions" },
   ],
   companyName: "River & Rock Adventure",
+  poweredBy: {
+    label: "Powered by",
+    logo: "/Images/OkGhumoLogo.png",
+    alt: "Ok Ghumo",
+    href: "https://okghumo.com",
+  },
 };
 
 export default FooterData;

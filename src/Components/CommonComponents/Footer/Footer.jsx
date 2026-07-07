@@ -170,7 +170,7 @@ const Footer = ({ data = FooterData }) => {
             </ul>
           </motion.div>
 
-          <motion.div className="site-footer__column" variants={columnVariants}>
+          <motion.div className="site-footer__column site-footer__column--contact" variants={columnVariants}>
             <h3 className="site-footer__heading">Contact</h3>
             <ul className="site-footer__contact">
               <li>
@@ -218,16 +218,36 @@ const Footer = ({ data = FooterData }) => {
         <div className="site-footer__divider" aria-hidden="true" />
 
         <div className="site-footer__bottom">
-          <p className="site-footer__copyright">
-            © {year} {data.companyName}. All rights reserved.
-          </p>
-          <nav className="site-footer__legal" aria-label="Legal links">
-            {data.legal.map((item) => (
-              <Link key={item.label} to={item.href}>
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+          <div className="site-footer__bottom-left">
+            <p className="site-footer__copyright">
+              © {year} {data.companyName}. All rights reserved.
+            </p>
+            <nav className="site-footer__legal" aria-label="Legal links">
+              {data.legal.map((item) => (
+                <Link key={item.label} to={item.href}>
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          <div className="site-footer__powered">
+            <span className="site-footer__powered-label">{data.poweredBy.label}</span>
+            <a
+              href={data.poweredBy.href}
+              className="site-footer__powered-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${data.poweredBy.label} ${data.poweredBy.alt}`}
+            >
+              <img
+                src={data.poweredBy.logo}
+                alt={data.poweredBy.alt}
+                className="site-footer__powered-logo"
+                loading="lazy"
+              />
+            </a>
+          </div>
         </div>
       </div>
     </footer>

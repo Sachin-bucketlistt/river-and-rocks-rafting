@@ -113,10 +113,9 @@
   z-index: 5;
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
-  padding: 5% 0vw 0vh 0%;
+  justify-content: space-between;
+  padding: 5% 0 3%;
   pointer-events: none;
-  z-index: 1;
   max-width: 90%;
   margin: auto;
   align-items: center;
@@ -314,8 +313,108 @@
 
 /* ─── Responsive ───────────────────────────────────────────────────── */
 @media (max-width: 768px) {
+  #hero-home {
+    height: 80vh;
+    min-height: 580px;
+    overflow: visible;
+    z-index: 2;
+  }
+
+  .kayak-slider-section {
+    position: relative;
+    height: 80vh;
+    z-index: 3;
+    overflow: visible;
+  }
+
+  .kayak-slide {
+    height: 100vh;
+    align-items: end;
+    justify-content: center;
+  }
+
   .kayak-image {
-    height: 72vh;
+    height: 92vh;
+    max-width: 96vw;
+  }
+
+  .hero-content {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+    display: block;
+    pointer-events: none;
+  }
+
+  .hero-title {
+    position: absolute;
+    top: 7%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    font-size: clamp(3.4rem, 15vw, 5.8rem);
+    line-height: 0.9;
+    z-index: 6;
+    text-shadow: 0 2px 18px rgba(255, 255, 255, 0.9);
+  }
+
+  .hero-bottom {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .hero-left {
+    position: absolute;
+    top: 21%;
+    left: 5%;
+    right: auto;
+    bottom: auto;
+    width: 40%;
+    max-width: 40%;
+    gap: 8px;
+    z-index: 6;
+  }
+
+  .hero-right {
+    position: absolute;
+    right: 5%;
+    bottom: 6%;
+    left: auto;
+    top: auto;
+    width: 44%;
+    max-width: 44%;
+    align-items: flex-end;
+    gap: 8px;
+    z-index: 6;
+  }
+
+  .hero-product-name {
+    font-size: 0.72rem;
+    line-height: 1.35;
+    text-shadow: 0 1px 10px rgba(255, 255, 255, 0.92);
+  }
+
+  .hero-description {
+    font-size: 0.62rem;
+    line-height: 1.5;
+    text-shadow: 0 1px 8px rgba(255, 255, 255, 0.9);
+  }
+
+  .hero-spec {
+    font-size: 0.52rem;
+    line-height: 1.45;
+    text-align: right;
+    text-shadow: 0 1px 8px rgba(255, 255, 255, 0.9);
   }
 
   .nav-btn {
@@ -333,7 +432,44 @@
 }
 
 @media (max-width: 480px) {
+  #hero-home {
+    min-height: 540px;
+  }
+
   .kayak-image {
-    height: 60vh;
+    height: 90vh;
+    max-width: 98vw;
+  }
+
+  .hero-title {
+    font-size: clamp(2.9rem, 14vw, 4.2rem);
+    top: 8%;
+  }
+
+  .hero-left {
+    top: 22%;
+    left: 4%;
+    width: 42%;
+    max-width: 42%;
+  }
+
+  .hero-right {
+    right: 4%;
+    bottom: 5%;
+    width: 46%;
+    max-width: 46%;
+  }
+
+  .hero-product-name {
+    font-size: 0.65rem;
+  }
+
+  .hero-description {
+    font-size: 0.58rem;
+  }
+
+  .hero-spec {
+    font-size: 0.48rem;
+    letter-spacing: 0.06em;
   }
 }
