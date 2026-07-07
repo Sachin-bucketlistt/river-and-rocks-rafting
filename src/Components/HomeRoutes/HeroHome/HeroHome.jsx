@@ -10,26 +10,25 @@ const kayakVariants = [
 
 const HeroHome = () => {
   const swiperRef = useRef(null);
-  const heroRef   = useRef(null);
+  const heroRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
   /* ── Raw pointer position normalised to [-0.5, 0.5] ── */
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  /* ── Spring-smoothed parallax — lazy / organic feel ── */
-  const kayakX       = useSpring(useTransform(mouseX, [-0.5, 0.5], [-28, 28]),  { stiffness: 40, damping: 15 });
-  const kayakY       = useSpring(useTransform(mouseY, [-0.5, 0.5], [-14, 14]),  { stiffness: 40, damping: 15 });
-  const kayakRotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6,  6]),   { stiffness: 40, damping: 15 });
-  const kayakRotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [ 4, -4]),   { stiffness: 40, damping: 15 });
+  const kayakX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-28, 28]), { stiffness: 40, damping: 15 });
+  const kayakY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-14, 14]), { stiffness: 40, damping: 15 });
+  const kayakRotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6, 6]), { stiffness: 40, damping: 15 });
+  const kayakRotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [4, -4]), { stiffness: 40, damping: 15 });
 
   /* ── Shadow scale mirrors parallax X for depth ── */
   const shadowScaleX = useSpring(useTransform(mouseX, [-0.5, 0.5], [0.82, 1.18]), { stiffness: 40, damping: 15 });
 
   function handleMouseMove(e) {
     const r = heroRef.current.getBoundingClientRect();
-    mouseX.set((e.clientX - r.left) / r.width  - 0.5);
-    mouseY.set((e.clientY - r.top)  / r.height - 0.5);
+    mouseX.set((e.clientX - r.left) / r.width - 0.5);
+    mouseY.set((e.clientY - r.top) / r.height - 0.5);
   }
 
   function handleMouseLeave() {
@@ -56,11 +55,10 @@ const HeroHome = () => {
           playsInline
           className="hero-bg-video"
         >
-          <source src="/Images/Video/HeroHomeVideo.mp4" type="video/mp4" />
+          <source src="/Images/Video/River&RocksRaftingVideo.mp4" type="video/mp4" />
         </video>
       </div>
 
-      {/* Kayak Slider */}
       <div className="kayak-slider-section">
         <Swiper
           onSwiper={(swiper) => { swiperRef.current = swiper; }}
@@ -92,13 +90,13 @@ const HeroHome = () => {
                     className="kayak-image"
                     draggable={false}
                     animate={{
-                      y:      [0, -18, 0],
+                      y: [0, -18, 0],
                       rotate: [-1.5, 1.5, -1.5],
                     }}
                     transition={{
-                      duration:   4.2,
-                      repeat:     Infinity,
-                      ease:       "easeInOut",
+                      duration: 4.2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
                       repeatType: "mirror",
                     }}
                   />
@@ -108,13 +106,13 @@ const HeroHome = () => {
                     className="kayak-water-shadow"
                     style={{ scaleX: shadowScaleX }}
                     animate={{
-                      scaleX:  [1,    0.85, 1],
+                      scaleX: [1, 0.85, 1],
                       opacity: [0.45, 0.28, 0.45],
                     }}
                     transition={{
-                      duration:   4.2,
-                      repeat:     Infinity,
-                      ease:       "easeInOut",
+                      duration: 4.2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
                       repeatType: "mirror",
                     }}
                   />
@@ -126,7 +124,6 @@ const HeroHome = () => {
         </Swiper>
       </div>
 
-      {/* Content Overlay */}
       <div className="hero-content">
         <motion.h1
           className="hero-title"
@@ -134,10 +131,9 @@ const HeroHome = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
         >
-          Kayaking
+          Rafting
         </motion.h1>
 
-        {/* Bottom info row */}
         <div className="hero-bottom">
           {/* Left: product info */}
           <motion.div
@@ -148,11 +144,10 @@ const HeroHome = () => {
           >
             <h2 className="hero-product-name">Safe & Secure Rafting Adventure</h2>
             <p className="hero-description">
-              Enjoy an exciting rafting adventure with certified guides, safety gear, and expert supervision for a fun and secure journey on the river.
+              From thrilling adventures to cultural escapes, River & Rock Adventure helps you explore India with carefully planned tours, experienced guides, and personalized travel services.
             </p>
           </motion.div>
 
-          {/* Right: specs */}
           <motion.div
             className="hero-right"
             initial={{ opacity: 0, x: 40 }}
@@ -160,10 +155,10 @@ const HeroHome = () => {
             transition={{ duration: 0.7, delay: 0.35, ease: "easeOut" }}
           >
             <span className="hero-spec">
-              Weight: 20kg &nbsp;|&nbsp; Length: 4.9m
+              Minimum Weight: 40 kg &nbsp;|&nbsp; Minimum Age: 12 Years
             </span>
             <span className="hero-spec">
-              Beam (Width): 57cm &nbsp;|&nbsp; Cockpit Size: 77.5cm
+              Maximum Weight: 110 kg &nbsp;|&nbsp; Maximum Age: 60 Years
             </span>
           </motion.div>
         </div>

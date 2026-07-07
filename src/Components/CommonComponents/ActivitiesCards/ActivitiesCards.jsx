@@ -1,134 +1,98 @@
-import React, { useRef } from "react";
-import {
-  motion,
-  useMotionValue,
-  useTransform,
-  useSpring,
-  useMotionTemplate,
-} from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
+import { useBookingModal } from "../BookingModal/BookingModalContext";
 import "./ActivitiesCards.css";
+
+const cardEase = [0.22, 1, 0.36, 1];
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 18 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.32, ease: cardEase },
+  },
+};
 
 const ActivityCard = ({
   title = "Activity",
   description = "",
-  price = "$0",
+  price = "Rs. 0 /-",
+  priceLabel = "Per Person",
+  distance = "",
   image = "",
   imageAlt = "",
-  colors = [],
-  onBook,
+  index = 0,
 }) => {
-  const cardRef = useRef(null);
-
-  /* ── Raw pointer position normalised to [-0.5, 0.5] ── */
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  /* ── 3-D tilt — spring-smoothed for a physical feel ── */
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [10, -10]), {
-    stiffness: 150,
-    damping: 22,
-  });
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-10, 10]), {
-    stiffness: 150,
-    damping: 22,
-  });
-
-  /* ── Shimmer radial-gradient that tracks the cursor ── */
-  const shimmerLeft = useTransform(mouseX, [-0.5, 0.5], ["10%", "90%"]);
-  const shimmerTop  = useTransform(mouseY, [-0.5, 0.5], ["10%", "90%"]);
-  const shimmerBg   = useMotionTemplate`radial-gradient(circle at ${shimmerLeft} ${shimmerTop}, rgba(255,255,255,0.35) 0%, transparent 55%)`;
-
-  function handleMouseMove(e) {
-    const r = cardRef.current.getBoundingClientRect();
-    mouseX.set((e.clientX - r.left) / r.width - 0.5);
-    mouseY.set((e.clientY - r.top) / r.height - 0.5);
-  }
-
-  function handleMouseLeave() {
-    mouseX.set(0);
-    mouseY.set(0);
-  }
+  const { openBookingModal } = useBookingModal();
 
   return (
-    <div
-      className="activity-card-perspective"
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+    <motion.article
+      className="activity-card"
+      variants={itemVariants}
+      whileHover={{ y: -5 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
     >
-      <motion.div
-        className="activity-card"
-        style={{ rotateX, rotateY, transformStyle: "preserve-3d", willChange: "transform" }}
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94] }}
-      >
-
-        {/* ── Kayak watermark: clipped + gently bobbing on water ──────── */}
-        <div className="activity-card__deco-layer" aria-hidden="true">
+      <div className="activity-card__media">
+        {image ? (
           <motion.img
-            className="activity-card__kayak-deco"
-            src="/Images/IllustrationImages/CardIllustrationImage.png"
-            alt=""
-            draggable={false}
-            animate={{
-              y: [0, -10, 0],
-              rotate: [-3, 3, -3],
-            }}
-            transition={{
-              duration: 4.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              repeatType: "mirror",
-            }}
+            className="activity-card__image"
+            src={image}
+            alt={imageAlt || title}
+            loading="lazy"
+            whileHover={{ scale: 1.04 }}
+            transition={{ duration: 0.28, ease: "easeOut" }}
           />
-        </div>
-
-        {/* ── Holographic shimmer follows the mouse ───────────────────── */}
-        <motion.div
-          className="activity-card__shimmer"
-          style={{ background: shimmerBg }}
+        ) : (
+          <div className="activity-card__image activity-card__image--placeholder" />
+        )}
+        <motion.span
+          className="activity-card__accent"
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true, amount: 0.6 }}
+          transition={{ duration: 0.38, delay: index * 0.05 + 0.12, ease: cardEase }}
           aria-hidden="true"
         />
+        {distance && (
+          <span className="activity-card__distance">{distance}</span>
+        )}
+      </div>
 
-        {/* Image area */}
-        <div className="activity-card__image-wrap">
-          {image && (
-            <motion.img
-              src={image}
-              alt={imageAlt || title}
-              className="activity-card__image"
-              whileHover={{ rotate: -2, scale: 1.04, transition: { duration: 0.35 } }}
-              draggable={false}
-            />
-          )}
-        </div>
-
-        {/* Body */}
-        <div className="activity-card__body">
-          <div className="activity-card__title-row">
-            <h3 className="activity-card__title">{title}</h3>
+      <div className="activity-card__body">
+        <div className="activity-card__head">
+          <h3 className="activity-card__title">{title}</h3>
+          <div className="activity-card__price-block">
             <span className="activity-card__price">{price}</span>
-          </div>
-
-          <p className="activity-card__desc">{description}</p>
-
-          <div className="activity-card__footer">
-            <motion.button
-              className="activity-card__book-btn"
-              onClick={onBook}
-              whileHover={{ scale: 1.12, backgroundColor: "var(--brand-color)" }}
-              whileTap={{ scale: 0.93 }}
-              transition={{ duration: 0.2 }}
-              aria-label={`Book ${title}`}
-            >
-              Book Now
-            </motion.button>
+            <span className="activity-card__price-label">{priceLabel}</span>
           </div>
         </div>
-      </motion.div>
-    </div>
+
+        {description && (
+          <p className="activity-card__desc">{description}</p>
+        )}
+
+        <motion.button
+          type="button"
+          className="activity-card__book-btn"
+          onClick={() => openBookingModal(title)}
+          whileHover={{ x: 2 }}
+          whileTap={{ scale: 0.97 }}
+          transition={{ duration: 0.18 }}
+          aria-label={`Book ${title}`}
+        >
+          <span>Book Now</span>
+          <motion.span
+            className="activity-card__book-arrow"
+            aria-hidden="true"
+            initial={{ x: 0 }}
+            whileHover={{ x: 3 }}
+          >
+            →
+          </motion.span>
+        </motion.button>
+      </div>
+    </motion.article>
   );
 };
 

@@ -2,8 +2,8 @@
 #hero-home {
   position: relative;
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
+  height: 80vh;
+  /* overflow: hidden; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,13 +20,11 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0.92) 40%,
-    rgba(255, 255, 255, 0.2) 75%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0.92) 40%,
+      rgba(255, 255, 255, 0.2) 75%,
+      rgba(255, 255, 255, 0) 100%);
   pointer-events: none;
   z-index: 1;
 }
@@ -43,10 +41,14 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  height: 100vh;
+  height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.kayak-slider-section .swiper {
+  overflow: visible !important;
 }
 
 /* ─── Swiper ───────────────────────────────────────────────────────── */
@@ -85,9 +87,7 @@
   object-fit: contain;
   display: block;
   filter:
-    drop-shadow(0px 42px 90px rgba(0, 0, 0, 0.48))
-    drop-shadow(0px 22px 45px rgba(0, 0, 0, 0.35))
-    drop-shadow(0px 8px 18px rgba(0, 0, 0, 0.4));
+    drop-shadow(0px 42px 90px rgba(0, 0, 0, 0.129)) drop-shadow(0px 22px 45px rgba(0, 0, 0, 0)) drop-shadow(0px 8px 18px rgba(0, 0, 0, 0.4));
   transition: filter 0.45s ease;
   will-change: transform;
   user-select: none;
@@ -98,7 +98,7 @@
 .kayak-water-shadow {
   width: 55%;
   height: 28px;
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.38) 0%, transparent 72%);
+  /* background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.38) 0%, transparent 72%); */
   filter: blur(10px);
   border-radius: 50%;
   margin-top: -14px;
@@ -118,8 +118,8 @@
   pointer-events: none;
   z-index: 1;
   max-width: 90%;
-    margin: auto;
-    align-items: center;
+  margin: auto;
+  align-items: center;
 }
 
 /* Big title */
@@ -127,7 +127,7 @@
   font-size: clamp(5rem, 14vw, 18rem);
   line-height: 0.88;
   letter-spacing: -0.02em;
-  color: #0a0a0a;
+  color: var(--color-text);
   /* text-transform: uppercase; */
   margin: 0;
   /* padding-top: 2vh; */
@@ -158,14 +158,14 @@
   font-size: 1.35rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #0a0a0a;
+  color: var(--color-text);
   margin: 0;
 }
 
 .hero-description {
   font-size: 0.78rem;
   line-height: 1.65;
-  color: #333;
+  color: var(--color-gray-900);
   margin: 0;
 }
 
@@ -177,8 +177,8 @@
 }
 
 .hero-btn {
-  background: #0a0a0a;
-  color: #fff;
+  background: var(--color-black);
+  color: var(--color-white);
   border: none;
   border-radius: 50px;
   padding: 12px 28px;
@@ -189,13 +189,13 @@
 }
 
 .hero-btn:hover {
-  background: #333;
+  background: var(--brand-color);
   transform: translateY(-1px);
 }
 
 .hero-price {
   font-size: 1.6rem;
-  color: #0a0a0a;
+  color: var(--color-text);
   letter-spacing: -0.01em;
 }
 
@@ -212,7 +212,7 @@
   font-size: 0.7rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #111;
+  color: var(--color-gray-950);
 }
 
 /* ─── Navigation Buttons ───────────────────────────────────────────── */
@@ -232,7 +232,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #111;
+  color: var(--color-gray-950);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   outline: none;
@@ -282,11 +282,30 @@
   transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
 }
 
-.color-dot--0 { background: #f5c820; border-color: #e0aa00; }
-.color-dot--1 { background: #e82020; border-color: #c01010; }
-.color-dot--2 { background: #1a6aee; border-color: #0a50c8; }
-.color-dot--3 { background: #22c040; border-color: #10a030; }
-.color-dot--4 { background: #8822e0; border-color: #6610c0; }
+.color-dot--0 {
+  background: var(--accent-color);
+  border-color: #d4c009;
+}
+
+.color-dot--1 {
+  background: var(--brand-color);
+  border-color: #cc0000;
+}
+
+.color-dot--2 {
+  background: #1a6aee;
+  border-color: #0a50c8;
+}
+
+.color-dot--3 {
+  background: #22c040;
+  border-color: #10a030;
+}
+
+.color-dot--4 {
+  background: #8822e0;
+  border-color: #6610c0;
+}
 
 .color-dot--active {
   transform: scale(1.45);
@@ -304,8 +323,13 @@
     height: 42px;
   }
 
-  .nav-btn--prev { left: 3%; }
-  .nav-btn--next { right: 3%; }
+  .nav-btn--prev {
+    left: 3%;
+  }
+
+  .nav-btn--next {
+    right: 3%;
+  }
 }
 
 @media (max-width: 480px) {

@@ -9,7 +9,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background-image: url("/Images/IllustrationImages/ActivitiesBackground.jpg");
+    background-image: url("/Images/BackgroundImageActivites.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -39,36 +39,42 @@
 
 /* ─── Section Header ────────────────────────────────────────────────── */
 .activities-header {
-    margin-bottom: 40px;
+    margin-bottom: 28px;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
 .activities-header h2 {
-    color: #0a0a0a;
+    color: var(--color-text);
+}
+
+.activities-header h2.section-heading-accent::after {
+    width: 48px;
 }
 
 .activities-header p {
-    color: #666;
+    color: var(--color-text-muted);
     max-width: 420px;
 }
 
 /* ─── Grid ──────────────────────────────────────────────────────────── */
 .activities-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 28px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
 }
 
 @media (max-width: 900px) {
     .activities-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
     }
 }
 
 @media (max-width: 560px) {
     .activities-grid {
         grid-template-columns: 1fr;
+        gap: 14px;
     }
 }

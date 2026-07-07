@@ -1,259 +1,176 @@
 /* ─── Activity Card ─────────────────────────────────────────────────── */
 .activity-card {
-    background: #fff;
-    border-radius: 22px;
-    overflow: visible;
-    box-shadow:
-        0 2px 12px rgba(0, 0, 0, 0.05),
-        0 8px 32px rgba(0, 0, 0, 0.07);
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    transition: box-shadow 0.28s ease, transform 0.28s ease;
-    position: relative;
-    padding: 15px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-medium);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  transition:
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
+  will-change: transform;
 }
 
 .activity-card:hover {
-    box-shadow:
-        0 6px 24px rgba(255, 0, 0, 0.08),
-        0 20px 52px rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.07),
+    0 0 0 1px rgba(0, 0, 0, 0.03);
 }
 
-/* top-left corner accent */
-.activity-card::before {
-    content: "";
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    width: 22px;
-    height: 22px;
-    border-top: 2.5px solid var(--brand-color);
-    border-left: 2.5px solid var(--brand-color);
-    border-radius: 22px 0 0 0;
-    pointer-events: none;
-    z-index: 2;
-}
-
-/* bottom-right corner accent */
-.activity-card::after {
-    content: "";
-    position: absolute;
-    bottom: -2px;
-    right: -2px;
-    width: 22px;
-    height: 22px;
-    border-bottom: 2.5px solid var(--brand-color);
-    border-right: 2.5px solid var(--brand-color);
-    border-radius: 0 0 22px 0;
-    pointer-events: none;
-    z-index: 2;
-}
-
-/* ─── Image Wrap ────────────────────────────────────────────────────── */
-.activity-card__image-wrap {
-    background: linear-gradient(145deg,
-            rgba(255, 0, 0, 0.045) 0%,
-            #f3f5f9 55%,
-            #eaecf2 100%);
-    border-radius: 14px;
-    overflow: hidden;
-    aspect-ratio: 4 / 3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-/* faint red glow dot top-right of image area */
-.activity-card__image-wrap::after {
-    content: "";
-    position: absolute;
-    top: -30px;
-    right: -30px;
-    width: 100px;
-    height: 100px;
-    background: radial-gradient(circle, rgba(255, 0, 0, 0.1) 0%, transparent 70%);
-    pointer-events: none;
+/* ─── Media ─────────────────────────────────────────────────────────── */
+.activity-card__media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--color-gray-100);
 }
 
 .activity-card__image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-    transform-origin: center center;
-    position: relative;
-    z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.activity-card__image--placeholder {
+  background: linear-gradient(135deg, var(--color-gray-100), var(--color-gray-200));
+}
+
+.activity-card__accent {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brand-color) 0%, var(--accent-color) 100%);
+  transform-origin: left center;
+  z-index: 2;
+}
+
+.activity-card__distance {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  font-family: "Questrial", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-black);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 4px 9px;
+  border-radius: 999px;
 }
 
 /* ─── Body ──────────────────────────────────────────────────────────── */
 .activity-card__body {
-    padding: 14px 2px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-    flex: 1;
-    border-top: 1.5px solid rgba(255, 0, 0, 0.12);
-    margin-top: 14px;
+  padding: 14px 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
 }
 
-.activity-card__title-row {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 10px;
+.activity-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .activity-card__title {
-    font-size: 1rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: #0a0a0a;
-    margin: 0;
-    line-height: 1.3;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  margin: 0;
+  line-height: 1.35;
+  flex: 1;
+  min-width: 0;
+}
+
+.activity-card__price-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+  gap: 1px;
 }
 
 .activity-card__price {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--brand-color);
-    letter-spacing: -0.01em;
-    white-space: nowrap;
-    flex-shrink: 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--brand-color);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.activity-card__price-label {
+  font-family: "Questrial", sans-serif;
+  font-size: 0.62rem;
+  color: var(--color-text-faint);
+  white-space: nowrap;
 }
 
 .activity-card__desc {
-    font-size: 0.78rem;
-    color: #666;
-    line-height: 1.55;
-    margin: 0;
-}
-
-/* ─── Footer ────────────────────────────────────────────────────────── */
-.activity-card__footer {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin-top: 8px;
-}
-
-/* ─── Color Swatches ────────────────────────────────────────────────── */
-.activity-card__colors {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.activity-card__colors-label {
-    font-size: 0.6rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #999;
-}
-
-.activity-card__swatches {
-    display: flex;
-    gap: 7px;
-    align-items: center;
-}
-
-.activity-card__swatch {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    display: inline-block;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
-    transition: transform 0.18s ease;
-}
-
-.activity-card__swatch:hover {
-    transform: scale(1.25);
+  font-family: "Questrial", sans-serif;
+  font-size: 0.76rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* ─── Book Button ───────────────────────────────────────────────────── */
 .activity-card__book-btn {
-    /* width: 42px;
-  height: 42px; */
-    /* border-radius: 50%; */
-    border: none;
-    background: #0a0a0a;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    flex-shrink: 0;
-    outline: none;
-    transition: background 0.2s ease;
-    padding: 10px 20px;
+  margin-top: auto;
+  width: 100%;
+  border: 1px solid var(--color-black);
+  background: transparent;
+  color: var(--color-black);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  outline: none;
+  padding: 9px 14px;
+  border-radius: 8px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: inherit;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
-.activity-card__book-btn svg {
-    width: 18px;
-    height: 18px;
-    pointer-events: none;
+.activity-card:hover .activity-card__book-btn,
+.activity-card__book-btn:hover {
+  background: var(--color-black);
+  color: var(--color-white);
+  border-color: var(--color-black);
 }
 
-/* ─── Perspective wrapper ────────────────────────────────────────────── */
-.activity-card-perspective {
-    perspective: 900px;
-    perspective-origin: 50% 50%;
+.activity-card__book-arrow {
+  font-size: 0.85rem;
+  line-height: 1;
+  transition: transform 0.18s ease;
 }
 
-/* ─── Kayak decoration: overflow-clipped inner layer ────────────────── */
-.activity-card__deco-layer {
-    position: absolute;
-    inset: 0;
-    border-radius: 22px;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.activity-card__kayak-deco {
-    position: absolute;
-    bottom: -12%;
-    right: -22%;
-    width: 95%;
-    opacity: 0.12;
-    transform-origin: center center;
-    user-select: none;
-    -webkit-user-drag: none;
-    /* soft vignette fade so edges melt into the card */
-    mask-image: radial-gradient(
-        ellipse 80% 80% at 60% 60%,
-        black 30%,
-        transparent 100%
-    );
-    -webkit-mask-image: radial-gradient(
-        ellipse 80% 80% at 60% 60%,
-        black 30%,
-        transparent 100%
-    );
-}
-
-/* ─── Holographic shimmer overlay ───────────────────────────────────── */
-.activity-card__shimmer {
-    position: absolute;
-    inset: 0;
-    border-radius: 22px;
-    pointer-events: none;
-    z-index: 5;
-    opacity: 0;
-    transition: opacity 0.22s ease;
-}
-
-.activity-card:hover .activity-card__shimmer {
-    opacity: 1;
-}
-
-/* ─── Ensure content layers sit above decoration ────────────────────── */
-.activity-card__image-wrap {
-    z-index: 1;
-}
-
-.activity-card__body {
-    position: relative;
-    z-index: 1;
+.activity-card__book-btn:hover .activity-card__book-arrow {
+  transform: translateX(3px);
 }
